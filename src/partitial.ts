@@ -25,7 +25,10 @@ export async function get(uid: number, input: inputHost): Promise<Host> {
   }
   let host= obj as Host;
   console.log("output", host)
-  return host
+  if (uid ==1) {
+    return host
+  }
+  return Promise.reject(undefined)
 }
 
 let object = new Object();
@@ -35,5 +38,6 @@ let obj = {
   "title": "kkk",
   "options": { "name": "11" }
 }
-get(1, obj)
+let ret = get(2, obj).catch(err=>console.log(err));
+console.log("22",typeof ret)
 
