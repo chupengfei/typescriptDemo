@@ -16,3 +16,4 @@ console.log(typeof b1)
 
 var d2: Array<number> = [1, 2, 34];
 console.log(typeof d2)
+console.log("kk", typeof undefined == 'object')
