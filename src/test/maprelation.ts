@@ -1,9 +1,18 @@
+// 数据库单表基础数据
 interface Host {
   id: number
   title: string
   uid: string | number
-  uname?: string
-  classifys?: Classify[]
+}
+// 关联查询数据（用于页面展示）
+interface HostVo extends Host{ 
+  uname: string
+  classifys: Classify[]
+}
+// 页面展示host列表 
+interface Vo {
+  hostList: HostVo[] 
+  page?: string
 }
 
 interface Classify {
@@ -16,11 +25,13 @@ interface User {
   name: string
   age: number
 }
+type VoOptional = Partial<Vo>
 
-export async function getHostList(id: number): Promise<Host[]> {
+export async function getHostList(id: number): Promise<Vo> {
   if (id) {
     let uids: number[] = []
-    let hostArr: Host[] = []
+    let hostArr: HostVo[] = []
+    let vos: VoOptional = {};
     let uMap: Map<number, string> = new Map();
     for (let index = 1; index <= 3; index++) {
       let host: Host = {
@@ -28,7 +39,7 @@ export async function getHostList(id: number): Promise<Host[]> {
         title: `运动=>${index}`,
         uid: index
       }
-      hostArr.push(host)
+      hostArr.push(host as HostVo)
       uids.push(host.uid as number)
     }
     let ret = await getUserList(uids.join(","))
@@ -43,11 +54,12 @@ export async function getHostList(id: number): Promise<Host[]> {
     }
     hostArr.forEach(iter => { 
       if (uMap.has(iter.uid as number)) { 
-        iter['uname'] = uMap.get(iter.uid as number)
+        iter['uname']  = <string>uMap.get(iter.uid as number)
       }
     })
-    console.log("hostArr", hostArr)
-    return hostArr
+    vos.hostList = hostArr;
+    console.log("vo", <Vo>vos)
+    return <Vo>vos
   }
   return Promise.reject(ADD_COLLECTION_FAILED)
 }
