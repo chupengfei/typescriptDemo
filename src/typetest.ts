@@ -2,6 +2,9 @@ let varob: User = {
   "name": "dd",
   "age":2
 }
+if(typeof varob === 'object'){
+    
+}
 interface User { 
   "name": string,
   "age":number
