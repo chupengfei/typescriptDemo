@@ -1,4 +1,4 @@
- function get(a: number): Promise<string> { 
+ function getName(a: number): Promise<string> { 
    // 异步执行
   new Promise((resolve, error) => { 
      // 1
@@ -21,7 +21,7 @@
   //return "kk"
 }
 
-let s = get(2)
+let s = getName(2)
 s.then(
   // 3
   function (resolve) {
