@@ -7,7 +7,7 @@ interface Input{
     tpye: Type
 }
 function get(input:Input){
-    console.log(input)
+    console.log("input",typeof input)
 }
 
 get({
