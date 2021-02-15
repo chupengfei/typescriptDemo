@@ -1,3 +1,5 @@
+import { userArrs } from "./map";
+
 interface Host {
   id: number,
   name: string,
@@ -31,5 +33,7 @@ export async function get(type: number): Promise<Host[]> {
   return Promise.reject("error ===")
 
 }
+
+console.log("userArrs",userArrs)
 
 
