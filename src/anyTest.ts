@@ -5,7 +5,7 @@ anyobj.items = [
 ]
 
 if (anyobj) {
-   anyobj.items.forEach( (item:any)=> {
-        console.log("name =>", item.name, " || age =>", item.age)
+  anyobj.items.forEach((item: {age:number})=> {
+        console.log("item =>", item," || age =>", item.age)
    });
  }
